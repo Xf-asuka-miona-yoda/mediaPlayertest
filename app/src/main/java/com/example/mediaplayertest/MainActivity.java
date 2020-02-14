@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -71,13 +73,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initMediaPlayer() {
         try{
-            File file = new File(Environment.getExternalStorageDirectory(),"千里行走.mp3");
-            mediaPlayer.setDataSource(file.getPath());
-//            mediaPlayer.setDataSource("http://sr.sycdn.kuwo.cn/fc648fa0550dbf357f49b44aaca4e128/5e46330e/resource/n3/17/78/2306602623.mp3");
+//            File file = new File(Environment.getExternalStorageDirectory(),"千里行走.mp3");
+//            mediaPlayer.setDataSource(file.getPath());
+
+            mediaPlayer.setDataSource("http://10.0.2.2:8080/test/起风了.mp3");
             mediaPlayer.prepare();
             mediaPlayer.setLooping(true);
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 public void onPrepared(MediaPlayer mp) {
+                    String time = Integer.toString(mediaPlayer.getCurrentPosition());
+                    Log.d("时长", time);
                     seekBar.setMax(mediaPlayer.getDuration());
                     musicLength.setText(format.format(mediaPlayer.getDuration())+"");
                     musicCur.setText("00:00");
