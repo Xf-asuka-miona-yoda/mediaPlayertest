@@ -1,1 +1,2 @@
 # mediaPlayer
+这是我在初学mediaplayer的时候的一个小小尝试
